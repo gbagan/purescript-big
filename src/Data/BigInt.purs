@@ -9,6 +9,8 @@ module Data.BigInt
 
 import Prelude
 import Data.Maybe (Maybe(..))
+import Data.Ord (abs)
+
 
 foreign import data BigInt :: Type
 
@@ -25,6 +27,11 @@ foreign import addImpl :: BigInt -> BigInt -> BigInt
 foreign import subImpl :: BigInt -> BigInt -> BigInt
 
 foreign import mulImpl :: BigInt -> BigInt -> BigInt
+
+foreign import divImpl :: BigInt -> BigInt -> BigInt
+
+foreign import modImpl :: BigInt -> BigInt -> BigInt
+
 
 instance Eq BigInt where
   eq = eqImpl
@@ -45,6 +52,14 @@ instance Ring BigInt where
   sub = subImpl
 
 instance CommutativeRing BigInt
+
+instance EuclideanRing BigInt where
+  div x y = (x - x `mod` y) `divImpl` y
+
+  mod x y = ((x `modImpl` y') + y') `modImpl` y'
+    where y' = abs y
+
+  degree = toInt <<< abs
 
 foreign import fromInt :: Int -> BigInt
 
