@@ -22,5 +22,7 @@ export const fromStringImpl = just => nothing => s => {
   }
 }
 
+export const toInt = x => BigInt.asIntN(32, x);
+
 export const toNumber = x => Number(x);
 

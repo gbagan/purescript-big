@@ -2,6 +2,7 @@ module Data.BigInt
   ( BigInt
   , fromInt
   , fromString
+  , toInt
   , toNumber
   )
   where
@@ -56,5 +57,7 @@ foreign import fromStringImpl
 
 fromString :: String -> Maybe BigInt
 fromString = fromStringImpl Just Nothing
+
+foreign import toInt :: BigInt -> Int
 
 foreign import toNumber :: BigInt -> Number
