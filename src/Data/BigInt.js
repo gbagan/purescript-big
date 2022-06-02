@@ -12,9 +12,9 @@ export const subImpl = x => y => x - y;
 
 export const mulImpl = x => y => x * y;
 
-export const divImpl = x => y => x / y;
+export const divImpl = x => y => y === 0n ? 0n : x / y;
 
-export const modImpl = x => y => x % y;
+export const modImpl = x => y => y === 0n ? 0n : x % y;
 
 export const fromInt = x => BigInt(x);
 
